@@ -1,10 +1,8 @@
-#All time complexities are using the length of one side of a matrix.
-
 def reverse_list(lst):
 #reverse_list reverses the order of elements in a list
 #:param lst: A list to be reversed
 #:return: A reversed copy of lst
-#:time complexity: O(n)
+#:time complexity: O(n), where n is the number of elements in lst
     listLen = len(lst) - 1
     returnList = []
     for i, n in enumerate(lst):
@@ -15,7 +13,7 @@ def copy_matrix(matrix):
 #copy_matrix copies a 2D list
 #:param matrix: A 2D list to be copied
 #:return: A copy of matrix
-#:time complexity: O(n)
+#:time complexity: O(n), where n is the number of elements in matrix
     returnMatrix = []
     for row in matrix:
         returnMatrix.append(row[:])
@@ -27,10 +25,7 @@ def pretty_print(matrix):
 #print.
 #:param matrix: A 2D list
 #:return: None
-#:time complexity: Runs in O(n^2) time, where n is the number of rows or columns
-#in matrix
-#because esach element in each row of the matrix is printed
-#once
+#:time complexity: O(n), where n is the number of elements in matrix
     for row in matrix:
         print(row)
         print()
@@ -41,7 +36,7 @@ def transpose_major(matrix, in_place = False):
 #:param in_place: determines whether matrix is transposed in-place or as a copy
 #:return t_matrix: Either a reference to a 2D list (if transposed in-place) or a
 #transposed copy of a 2D list
-#:time complexity: O(n^2)
+#:time complexity: O(n), where n is the number of elements in matrix
     if in_place:
         t_matrix = matrix
         for i in range(len(matrix)):
@@ -58,7 +53,7 @@ def transpose_minor(matrix, in_place = False):
 #:param in_place: determines whether matrix is transposed in-place or as a copy
 #:return t_matrix: Either a reference to a 2D list (if transposed in-place) or a
 #transposed copy of a 2D list
-#:time complexity: O(n^2)
+#:time complexity: O(n), where n is the number of elements in matrix
     matrix_width = len(matrix[0]) - 1
     if in_place:
         t_matrix = matrix
@@ -77,7 +72,7 @@ def reverse_matrix_rows(matrix, in_place = False):
 #:param matrix: A 2D list to have its rows reversed
 #:param in_place: determines whether matrix is reversed in-place or as a copy
 #:return rev_matrix: Either a reference to a 2D list (if reversed in-place) or a reversed copy of a 2D list
-#:time complexity: O(n)
+#:time complexity: O(sqrt(n)), where n is the number of elements in matrix
     if in_place:
         rev_matrix = matrix
         matrixLen = len(matrix) - 1
@@ -96,9 +91,9 @@ def rotate(matrix):
 #rotate rotates a 2D list 90 degrees counter-clockwise
 #:param matrix: A 2D list to be rotated
 #:return rotated_matrix: A 2D list that is a 90 degree counter-clockwise rotation of matrix
-#:time complexity: O(n^2)
-    size = len(matrix)
+#:time complexity: O(n), where n is the number of elements in matrix
 # calculate size
+    size = len(matrix)
     if size >= 4: # I should be able to change this 4 to any value > 0
 # rotate counter-clockwise in place
         rotated_matrix = matrix
@@ -119,22 +114,20 @@ def check_match(big_matrix, small_matrix, start_row, start_col):
 #:param start_row: The row in big_matrix where the top left corner of small_matrix is being checked
 #:param start_col: The column in big_matrix where the top left corner of small_matrix is being checked
 #:return: True if small_matrix is found in big_matrix, False otherwise
-#:time complexity: O(n^2)
+#:time complexity: O(n), where n is the number of elements in small_matrix
     for i in range(len(small_matrix)):
         for j in range(len(small_matrix[0])):
             if big_matrix[start_row + i][start_col + j] != small_matrix[i][j]:
                 return False
     return True
-
 # returns True or False, depending on whether a match was found
-    return
 
 def count_appearances(big_matrix, small_matrix):
 #count_appearances counts the number of times a small matrix appears in a big matrix at any rotation
 #:param big_matrix: A 2D list that may contain small_matrix
 #:param small_matrix: A 2D list that may be contained in big_matrix
 #:return: A list of length 4, where each element is the number of times small_matrix appears in big_matrix at 0, 90, 180, and 270 degree rotations
-#:time complexity: O(n^4)
+#:time complexity: O(n^2), number of elements in big_matrix times the number of elements in small_matrix
 # YOUR CODE BELOW
     counts = [0,0,0,0] # counts for 0, 90, 180, 270 degree rotations
     for i in range(len(big_matrix) - len(small_matrix) + 1):
